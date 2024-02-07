@@ -52,7 +52,6 @@ public class FiletransferController {
 
     @Resource
     IFiletransferService filetransferService;
-
     @Resource
     IFileService fileService;
     @Resource

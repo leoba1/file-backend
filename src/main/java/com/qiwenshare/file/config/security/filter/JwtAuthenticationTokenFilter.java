@@ -44,7 +44,9 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             "/param/grouplist",
             "/v3/api-docs",
             "/swagger-ui.html",
-            "/office/IndexServlet"
+            "/office/IndexServlet",
+            "/temp/upload",
+            "/temp/*"
     };
     private String[] antWhiteUri = {"/*.html",
             "/**/*.html",

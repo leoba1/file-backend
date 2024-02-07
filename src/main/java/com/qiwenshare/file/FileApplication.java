@@ -1,5 +1,6 @@
 package com.qiwenshare.file;
 
+import cn.hutool.core.util.RandomUtil;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
