@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Jwt过滤器（第一个过滤器）：获取用户token，查询用户信息拼装到security中，以便后续filter使用
@@ -46,7 +47,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             "/swagger-ui.html",
             "/office/IndexServlet",
             "/temp/upload",
-            "/temp/*"
+            "/temp/*",
+            "/temp/download/"
     };
     private String[] antWhiteUri = {"/*.html",
             "/**/*.html",
@@ -79,10 +81,13 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             }
         }
 
-        List<String> ignoreUriList = Arrays.asList(ignoreUri);
-        if (ignoreUriList.contains(request.getRequestURI())) {
-            chain.doFilter(request, response);
-            return;
+        for (String uri : ignoreUri) {
+            // 将*转换为.，并且使用^和$确保只匹配完整的URI
+            String regex = uri.replace("*", ".*");
+            if (Pattern.matches(regex, request.getRequestURI())) {
+                chain.doFilter(request, response);
+                return;
+            }
         }
         String token = request.getHeader("token");
         if (StringUtils.isEmpty(token)) {
