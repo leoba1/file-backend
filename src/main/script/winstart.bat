@@ -13,7 +13,7 @@ set LOG_PATH=%DEPLOY_PATH%/logs
 
 set CLASSPATH=".;%CONF_DIR%;%LIB_JARS%"
 
-set JAVA_VM=-D64 -server -Xmx512m -Xms512m  -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC 
+set JAVA_VM=-D64 -server -Xmx512m -Xms512m  -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC
 set JAVA_OPTIONS=-Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.port=8231
 
 echo DEPLOY_PATH: %DEPLOY_PATH%
@@ -21,7 +21,7 @@ echo CLASSPATH=%CLASSPATH%
 echo "Start App..."
 
 java -version
-java  %JAVA_VM% %JAVA_OPTIONS% -classpath %CLASSPATH% -Xdebug  -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8336 com.qiwenshare.file.FileApplication
+java  %JAVA_VM% %JAVA_OPTIONS% -classpath %CLASSPATH% -Xdebug  -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8336 com.bai.file.FileApplication
 
 goto end
 

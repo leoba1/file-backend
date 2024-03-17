@@ -4,9 +4,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.qiwenshare.file.mapper.UserFileMapper">
+<mapper namespace="com.bai.file.mapper.UserFileMapper">
 
-    <select id="selectPageVo" parameterType="com.qiwenshare.file.domain.UserFile" resultType="com.qiwenshare.file.vo.file.FileListVO">
+    <select id="selectPageVo" parameterType="com.bai.file.domain.UserFile" resultType="com.bai.file.vo.file.FileListVO">
         select * from userfile a
         left join image on a.fileId = image.fileId
         left join file on file.fileId = a.fileId
@@ -42,7 +42,7 @@
         ORDER BY isDir desc
     </select>
 
-    <select id="selectUserFileByLikeRightFilePath" resultType="com.qiwenshare.file.domain.UserFile">
+    <select id="selectUserFileByLikeRightFilePath" resultType="com.bai.file.domain.UserFile">
         select * from userfile
         where (filePath = #{filePath} or filePath like concat(#{filePath},'/%')) and userId = #{userId} and deleteFlag = 0
     </select>

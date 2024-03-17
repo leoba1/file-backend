@@ -85,7 +85,7 @@ echo "Using CONF_DIR: $CONF_DIR"
 
 CLASSPATH=".:$CONF_DIR:$LIB_JARS"
 
-EXEC_CMDLINE="java -classpath ${CLASSPATH} ${USER_VMARGS} ${GC_OPTS} ${JAVA_JMX_OPTS} ${JAVA_DEBUG} ${JAVA_OPTS} com.qiwenshare.file.FileApplication"
+EXEC_CMDLINE="java -classpath ${CLASSPATH} ${USER_VMARGS} ${GC_OPTS} ${JAVA_JMX_OPTS} ${JAVA_DEBUG} ${JAVA_OPTS} com.bai.file.FileApplication"
 
 echo "Start app command line: ${EXEC_CMDLINE}" >> $STDOUT_FILE
 echo "Starting $SERVER_NAME ..."
@@ -98,7 +98,7 @@ while [ $COUNT -lt 120 ]; do
     echo -e ".\c"
     sleep 1
     IS_LISTENED=`netstat -an | grep -w LISTEN | grep -w $SERVER_PORT`
-    let COUNT++  
+    let COUNT++
     if [ -n "$IS_LISTENED" ]; then
         COUNT=1000
     fi
