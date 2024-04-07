@@ -1,6 +1,5 @@
 package com.bai.file.controller;
 
-import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import com.bai.file.domain.ShareFile;
 import com.bai.file.domain.UserFile;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -9,7 +8,6 @@ import com.bai.file.component.FileDealComp;
 import com.bai.file.io.QiwenFile;
 import com.bai.file.service.UserFileService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 
@@ -26,9 +24,6 @@ public class TaskController {
     FileDealComp fileDealComp;
     @Resource
     IShareFileService shareFileService;
-    @Autowired
-    private ElasticsearchClient elasticsearchClient;
-
 
     @Scheduled(fixedRate = 1000 * 60 * 60 * 24)
     public void updateElasticSearch() {
@@ -46,10 +41,10 @@ public class TaskController {
                 log.error(e.getMessage());
             }
         }
-        userfileList = userFileService.list(new QueryWrapper<UserFile>().eq("deleteFlag", 0));
-        for (UserFile userFile : userfileList) {
-            fileDealComp.uploadESByUserFileId(userFile.getUserFileId());
-        }
+//        userfileList = userFileService.list(new QueryWrapper<UserFile>().eq("deleteFlag", 0));
+//        for (UserFile userFile : userfileList) {
+//            fileDealComp.uploadESByUserFileId(userFile.getUserFileId());
+//        }
 
     }
 

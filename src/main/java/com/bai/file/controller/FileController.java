@@ -7,7 +7,6 @@ import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.HighlighterEncoder;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.bai.file.api.IUserFileService;
-import com.bai.file.config.es.FileSearch;
 import com.bai.file.domain.FileBean;
 import com.bai.file.domain.UserFile;
 import com.bai.file.dto.file.*;
@@ -70,8 +69,6 @@ public class FileController {
     FileDealComp fileDealComp;
     @Resource
     AsyncTaskComp asyncTaskComp;
-    @Autowired
-    private ElasticsearchClient elasticsearchClient;
     @Value("${ufop.storage-type}")
     private Integer storageType;
 
@@ -167,72 +164,11 @@ public class FileController {
         UserFile userFile = QiwenFileUtil.getQiwenDir(userId, filePath, createFoldDto.getFileName());
 
         userFileService.save(userFile);
-        fileDealComp.uploadESByUserFileId(userFile.getUserFileId());
+//        fileDealComp.uploadESByUserFileId(userFile.getUserFileId());
         return RestResult.success();
     }
 
-    @Operation(summary = "文件搜索", description = "文件搜索", tags = {"file"})
-    @GetMapping(value = "/search")
-    @MyLog(operation = "文件搜索", module = CURRENT_MODULE)
-    @ResponseBody
-    public RestResult<SearchFileVO> searchFile(SearchFileDTO searchFileDTO) {
-        JwtUser sessionUserBean =  SessionUtil.getSession();
 
-        int currentPage = (int)searchFileDTO.getCurrentPage() - 1;
-        int pageCount = (int)(searchFileDTO.getPageCount() == 0 ? 10 : searchFileDTO.getPageCount());
-
-        SearchResponse<FileSearch> search = null;
-        try {
-            search = elasticsearchClient.search(s -> s
-                            .index("filesearch")
-                            .query(_1 -> _1
-                                    .bool(_2 -> _2
-                                            .must(_3 -> _3
-                                                    .bool(_4 -> _4
-                                                            .should(_5 -> _5
-                                                                    .match(_6 -> _6
-                                                                            .field("fileName")
-                                                                            .query(searchFileDTO.getFileName())))
-                                                            .should(_5 -> _5
-                                                                    .wildcard(_6 -> _6
-                                                                            .field("fileName")
-                                                                            .wildcard("*" + searchFileDTO.getFileName() + "*")))
-                                                            .should(_5 -> _5
-                                                                    .match(_6 -> _6
-                                                                            .field("content")
-                                                                            .query(searchFileDTO.getFileName())))
-                                                            .should(_5 -> _5
-                                                                    .wildcard(_6 -> _6
-                                                                            .field("content")
-                                                                            .wildcard("*" + searchFileDTO.getFileName() + "*")))
-                                                    ))
-                                            .must(_3 -> _3
-                                                    .term(_4 -> _4
-                                                            .field("userId")
-                                                            .value(sessionUserBean.getUserId())))
-                                    ))
-                            .from(currentPage)
-                            .size(pageCount)
-                            .highlight(h -> h
-                                    .fields("fileName", f -> f.type("plain")
-                                            .preTags("<span class='keyword'>").postTags("</span>"))
-                                    .encoder(HighlighterEncoder.Html))
-                            ,
-                    FileSearch.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        List<SearchFileVO> searchFileVOList = new ArrayList<>();
-        for (Hit<FileSearch> hit : search.hits().hits()) {
-            SearchFileVO searchFileVO = new SearchFileVO();
-            BeanUtil.copyProperties(hit.source(), searchFileVO);
-            searchFileVO.setHighLight(hit.highlight());
-            searchFileVOList.add(searchFileVO);
-            asyncTaskComp.checkESUserFileId(searchFileVO.getUserFileId());
-        }
-        return RestResult.success().dataList(searchFileVOList, searchFileVOList.size());
-    }
 
 
     @Operation(summary = "文件重命名", description = "文件重命名", tags = {"file"})
@@ -264,7 +200,7 @@ public class FileController {
                 userFileService.updateById(newUserFile);
             }
         }
-        fileDealComp.uploadESByUserFileId(renameFileDto.getUserFileId());
+//        fileDealComp.uploadESByUserFileId(renameFileDto.getUserFileId());
         return RestResult.success();
     }
 
@@ -299,7 +235,7 @@ public class FileController {
                     userFileService.deleteUserFile(userFileId, SessionUtil.getUserId());
             });
 
-            fileDealComp.deleteESByUserFileId(userFileId);
+//            fileDealComp.deleteESByUserFileId(userFileId);
         }
 
         return RestResult.success().message("批量删除文件成功");
@@ -313,7 +249,7 @@ public class FileController {
 
         JwtUser sessionUserBean =  SessionUtil.getSession();
         userFileService.deleteUserFile(deleteFileDto.getUserFileId(), sessionUserBean.getUserId());
-        fileDealComp.deleteESByUserFileId(deleteFileDto.getUserFileId());
+//        fileDealComp.deleteESByUserFileId(deleteFileDto.getUserFileId());
 
         return RestResult.success();
 

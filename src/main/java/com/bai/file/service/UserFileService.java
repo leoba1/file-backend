@@ -251,9 +251,9 @@ public class UserFileService extends ServiceImpl<UserFileMapper, UserFile> imple
                         .eq(UserFile::getDeleteFlag, 0);
                 userFileMapper.update(null, userFileLambdaUpdateWrapper1);
             }
-            for (String userFileId : userFileIds) {
-                fileDealComp.deleteESByUserFileId(userFileId);
-            }
+//            for (String userFileId : userFileIds) {
+//                fileDealComp.deleteESByUserFileId(userFileId);
+//            }
         });
     }
 

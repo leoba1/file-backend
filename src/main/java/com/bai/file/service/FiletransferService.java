@@ -107,7 +107,7 @@ public class FiletransferService implements IFiletransferService {
 
             try {
                 userFileMapper.insert(userFile);
-                fileDealComp.uploadESByUserFileId(userFile.getUserFileId());
+//                fileDealComp.uploadESByUserFileId(userFile.getUserFileId());
             } catch (Exception e) {
                 log.warn("极速上传文件冲突重命名处理: {}", JSON.toJSONString(userFile));
 
@@ -198,7 +198,7 @@ public class FiletransferService implements IFiletransferService {
 
                 try {
                     userFileMapper.insert(userFile);
-                    fileDealComp.uploadESByUserFileId(userFile.getUserFileId());
+//                    fileDealComp.uploadESByUserFileId(userFile.getUserFileId());
                 } catch (Exception e) {
                     UserFile userFile1 = userFileMapper.selectOne(new QueryWrapper<UserFile>().lambda()
                             .eq(UserFile::getUserId, userFile.getUserId())
@@ -213,7 +213,7 @@ public class FiletransferService implements IFiletransferService {
                         String fileName = fileDealComp.getRepeatFileName(userFile, userFile.getFilePath());
                         userFile.setFileName(fileName);
                         userFileMapper.insert(userFile);
-                        fileDealComp.uploadESByUserFileId(userFile.getUserFileId());
+//                        fileDealComp.uploadESByUserFileId(userFile.getUserFileId());
                     }
                 }
 

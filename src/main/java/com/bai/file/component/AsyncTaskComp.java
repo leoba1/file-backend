@@ -105,14 +105,6 @@ public class AsyncTaskComp {
         return new AsyncResult<>("deleteUserFile");
     }
 
-    public Future<String> checkESUserFileId(String userFileId) {
-        UserFile userFile = userFileMapper.selectById(userFileId);
-        if (userFile == null) {
-            fileDealComp.deleteESByUserFileId(userFileId);
-        }
-        return new AsyncResult<>("checkUserFileId");
-    }
-
 
     public Future<String> saveUnzipFile(UserFile userFile, FileBean fileBean, int unzipMode, String entryName, String filePath) {
         String unzipUrl = UFOPUtils.getTempFile(fileBean.getFileUrl()).getAbsolutePath().replace("." + userFile.getExtendName(), "");

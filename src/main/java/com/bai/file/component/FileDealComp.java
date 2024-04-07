@@ -7,7 +7,6 @@ import com.alibaba.fastjson2.JSON;
 import com.bai.file.api.IShareFileService;
 import com.bai.file.api.IShareService;
 import com.bai.file.api.IUserService;
-import com.bai.file.config.es.FileSearch;
 import com.bai.file.domain.*;
 import com.bai.file.mapper.FileMapper;
 import com.bai.file.mapper.MusicMapper;
@@ -76,8 +75,6 @@ public class FileDealComp {
     private UFOPFactory ufopFactory;
     @Resource
     private MusicMapper musicMapper;
-    @Autowired
-    private ElasticsearchClient elasticsearchClient;
 
     public static Executor exec = Executors.newFixedThreadPool(20);
 
@@ -278,51 +275,6 @@ public class FileDealComp {
 
 
         return isExistPath;
-    }
-
-
-    public void uploadESByUserFileId(String userFileId) {
-        exec.execute(()->{
-            try {
-
-                Map<String, Object> param = new HashMap<>();
-                param.put("userFileId", userFileId);
-                List<UserFile> userfileResult = userFileMapper.selectByMap(param);
-                if (userfileResult != null && userfileResult.size() > 0) {
-                    FileSearch fileSearch = new FileSearch();
-                    BeanUtil.copyProperties(userfileResult.get(0), fileSearch);
-                /*if (fileSearch.getIsDir() == 0) {
-
-                    Reader reader = ufopFactory.getReader(fileSearch.getStorageType());
-                    ReadFile readFile = new ReadFile();
-                    readFile.setFileUrl(fileSearch.getFileUrl());
-                    String content = reader.read(readFile);
-                    //全文搜索
-                    fileSearch.setContent(content);
-
-                }*/
-                    elasticsearchClient.index(i -> i.index("filesearch").id(fileSearch.getUserFileId()).document(fileSearch));
-                }
-            } catch (Exception e) {
-                log.debug("ES更新操作失败，请检查配置");
-            }
-        });
-
-
-    }
-
-    public void deleteESByUserFileId(String userFileId) {
-        exec.execute(() -> {
-            try {
-                elasticsearchClient.delete(d -> d
-                        .index("filesearch")
-                        .id(userFileId));
-            } catch (Exception e) {
-                log.debug("ES删除操作失败，请检查配置");
-            }
-        });
-
-
     }
 
     /**
