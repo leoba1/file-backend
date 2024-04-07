@@ -52,13 +52,14 @@ public class TempFIleController {
 
         //生成随机数
         String randomCode = null;
-        randomCode=RandomUtil.randomString(RandomUtil.BASE_CHAR_NUMBER, 6);
+        String ranCode = "QWERTYUIOPASDFGHJKLZXCVBNMabcdefghijklmnopqrstuvwxyz0123456789";
+        randomCode=RandomUtil.randomString(ranCode, 6);
 
         QueryWrapper<TempFile> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("code",randomCode);
         TempFile one = tempFileService.getOne(queryWrapper);
         if (one != null){
-            randomCode =RandomUtil.randomString(RandomUtil.BASE_CHAR_NUMBER, 6);
+            randomCode =RandomUtil.randomString(ranCode, 6);
         }
 
         //获取原文件的名称
