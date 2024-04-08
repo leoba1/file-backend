@@ -26,6 +26,7 @@
             <if test="noticeListDTO.title != null and noticeListDTO.title != ''">
                 and title like '%${noticeListDTO.title}%'
             </if>
+                and validDateTime = "0"
         </where>
         order by createTime desc
     </select>
