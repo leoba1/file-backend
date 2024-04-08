@@ -1,6 +1,6 @@
 package com.bai.file.service;
 
-import com.bai.file.api.INoticeService;
+import com.bai.file.Iinterface.INoticeService;
 import com.bai.file.domain.Notice;
 import com.bai.file.dto.notice.NoticeListDTO;
 import com.bai.file.mapper.NoticeMapper;

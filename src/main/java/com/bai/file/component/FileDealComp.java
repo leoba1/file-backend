@@ -1,23 +1,20 @@
 package com.bai.file.component;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.IdUtil;
-import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import com.alibaba.fastjson2.JSON;
-import com.bai.file.api.IShareFileService;
-import com.bai.file.api.IShareService;
-import com.bai.file.api.IUserService;
+import com.bai.file.Iinterface.IShareFileService;
+import com.bai.file.Iinterface.IShareService;
+import com.bai.file.Iinterface.IUserService;
 import com.bai.file.domain.*;
 import com.bai.file.mapper.FileMapper;
 import com.bai.file.mapper.MusicMapper;
 import com.bai.file.mapper.UserFileMapper;
-import com.bai.file.util.QiwenFileUtil;
+import com.bai.file.util.FMSFileUtil;
 import com.bai.file.util.TreeNode;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.qiwenshare.common.util.DateUtil;
 import com.qiwenshare.common.util.MusicUtils;
 import com.qiwenshare.common.util.security.SessionUtil;
-import com.bai.file.domain.*;
 import com.bai.file.io.QiwenFile;
 import com.qiwenshare.ufop.factory.UFOPFactory;
 import com.qiwenshare.ufop.operation.copy.Copier;
@@ -43,7 +40,6 @@ import org.jaudiotagger.tag.datatype.Artwork;
 import org.jaudiotagger.tag.id3.AbstractID3v2Frame;
 import org.jaudiotagger.tag.id3.AbstractID3v2Tag;
 import org.jaudiotagger.tag.id3.framebody.FrameBodyAPIC;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -154,7 +150,7 @@ public class FileDealComp {
                     .eq(UserFile::getUserId, sessionUserId);
             List<UserFile> userFileList = userFileMapper.selectList(lambdaQueryWrapper);
             if (userFileList.size() == 0) {
-                UserFile userFile = QiwenFileUtil.getQiwenDir(sessionUserId, parentFilePath, fileName);
+                UserFile userFile = FMSFileUtil.getQiwenDir(sessionUserId, parentFilePath, fileName);
                 try {
                     userFileMapper.insert(userFile);
                 } catch (Exception e) {
@@ -179,7 +175,7 @@ public class FileDealComp {
         LambdaQueryWrapper<UserFile> lambdaQueryWrapper = new LambdaQueryWrapper<>();
 
         lambdaQueryWrapper.select(UserFile::getFileName, UserFile::getFilePath)
-                .likeRight(UserFile::getFilePath, QiwenFileUtil.formatLikePath(filePath))
+                .likeRight(UserFile::getFilePath, FMSFileUtil.formatLikePath(filePath))
                 .eq(UserFile::getIsDir, 1)
                 .eq(UserFile::getDeleteFlag, 0)
                 .eq(UserFile::getUserId, sessionUserId)

@@ -1,4 +1,4 @@
-package com.bai.file.api;
+package com.bai.file.Iinterface;
 
 import com.bai.file.domain.RecoveryFile;
 import com.baomidou.mybatisplus.extension.service.IService;

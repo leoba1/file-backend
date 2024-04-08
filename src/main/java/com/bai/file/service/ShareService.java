@@ -1,6 +1,6 @@
 package com.bai.file.service;
 
-import com.bai.file.api.IShareService;
+import com.bai.file.Iinterface.IShareService;
 import com.bai.file.domain.Share;
 import com.bai.file.dto.sharefile.ShareListDTO;
 import com.bai.file.mapper.ShareMapper;

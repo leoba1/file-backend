@@ -1,16 +1,11 @@
 package com.bai.file.controller;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.IdUtil;
-import co.elastic.clients.elasticsearch.ElasticsearchClient;
-import co.elastic.clients.elasticsearch.core.SearchResponse;
-import co.elastic.clients.elasticsearch.core.search.HighlighterEncoder;
-import co.elastic.clients.elasticsearch.core.search.Hit;
-import com.bai.file.api.IUserFileService;
+import com.bai.file.Iinterface.IUserFileService;
 import com.bai.file.domain.FileBean;
 import com.bai.file.domain.UserFile;
 import com.bai.file.dto.file.*;
-import com.bai.file.util.QiwenFileUtil;
+import com.bai.file.util.FMSFileUtil;
 import com.bai.file.util.TreeNode;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -21,14 +16,12 @@ import com.qiwenshare.common.result.RestResult;
 import com.qiwenshare.common.util.DateUtil;
 import com.qiwenshare.common.util.security.JwtUser;
 import com.qiwenshare.common.util.security.SessionUtil;
-import com.bai.file.api.IFileService;
+import com.bai.file.Iinterface.IFileService;
 import com.bai.file.component.AsyncTaskComp;
 import com.bai.file.component.FileDealComp;
-import com.bai.file.dto.file.*;
 import com.bai.file.io.QiwenFile;
 import com.bai.file.vo.file.FileDetailVO;
 import com.bai.file.vo.file.FileListVO;
-import com.bai.file.vo.file.SearchFileVO;
 import com.qiwenshare.ufop.factory.UFOPFactory;
 import com.qiwenshare.ufop.operation.copy.Copier;
 import com.qiwenshare.ufop.operation.copy.domain.CopyFile;
@@ -37,7 +30,6 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.util.StringUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
@@ -161,7 +153,7 @@ public class FileController {
             return RestResult.fail().message("同名文件夹已存在");
         }
 
-        UserFile userFile = QiwenFileUtil.getQiwenDir(userId, filePath, createFoldDto.getFileName());
+        UserFile userFile = FMSFileUtil.getQiwenDir(userId, filePath, createFoldDto.getFileName());
 
         userFileService.save(userFile);
 //        fileDealComp.uploadESByUserFileId(userFile.getUserFileId());

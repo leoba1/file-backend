@@ -1,4 +1,4 @@
-package com.bai.file.api;
+package com.bai.file.Iinterface;
 
 import com.bai.file.domain.Share;
 import com.bai.file.dto.sharefile.ShareListDTO;

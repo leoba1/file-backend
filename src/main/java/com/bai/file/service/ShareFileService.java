@@ -1,6 +1,6 @@
 package com.bai.file.service;
 
-import com.bai.file.api.IShareFileService;
+import com.bai.file.Iinterface.IShareFileService;
 import com.bai.file.domain.ShareFile;
 import com.bai.file.mapper.ShareFileMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

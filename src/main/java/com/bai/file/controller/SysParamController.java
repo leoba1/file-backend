@@ -5,7 +5,7 @@ import com.bai.file.domain.SysParam;
 import com.bai.file.dto.param.QueryGroupParamDTO;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.qiwenshare.common.result.RestResult;
-import com.bai.file.api.ISysParamService;
+import com.bai.file.Iinterface.ISysParamService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

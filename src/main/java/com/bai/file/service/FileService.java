@@ -1,7 +1,7 @@
 package com.bai.file.service;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.bai.file.api.IFileService;
+import com.bai.file.Iinterface.IFileService;
 import com.bai.file.component.AsyncTaskComp;
 import com.bai.file.component.FileDealComp;
 import com.bai.file.domain.FileBean;
@@ -12,7 +12,7 @@ import com.bai.file.mapper.FileMapper;
 import com.bai.file.mapper.ImageMapper;
 import com.bai.file.mapper.MusicMapper;
 import com.bai.file.mapper.UserFileMapper;
-import com.bai.file.util.QiwenFileUtil;
+import com.bai.file.util.FMSFileUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -110,7 +110,7 @@ public class FileService extends ServiceImpl<FileMapper, FileBean> implements IF
         }
 
         if (!fileEntryNameList.isEmpty() && unzipMode == 1) {
-            UserFile qiwenDir = QiwenFileUtil.getQiwenDir(userFile.getUserId(), userFile.getFilePath(), userFile.getFileName());
+            UserFile qiwenDir = FMSFileUtil.getQiwenDir(userFile.getUserId(), userFile.getFilePath(), userFile.getFileName());
             userFileMapper.insert(qiwenDir);
         }
         for (int i = 0; i < fileEntryNameList.size(); i++){

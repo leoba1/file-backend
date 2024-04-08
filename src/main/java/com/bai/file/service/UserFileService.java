@@ -3,7 +3,7 @@ package com.bai.file.service;
 import cn.hutool.core.net.URLDecoder;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.RandomUtil;
-import com.bai.file.api.IUserFileService;
+import com.bai.file.Iinterface.IUserFileService;
 import com.bai.file.component.FileDealComp;
 import com.bai.file.domain.RecoveryFile;
 import com.bai.file.domain.UserFile;

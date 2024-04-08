@@ -2,7 +2,7 @@ package com.bai.file.service;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSON;
-import com.bai.file.api.IFiletransferService;
+import com.bai.file.Iinterface.IFiletransferService;
 import com.bai.file.component.FileDealComp;
 import com.bai.file.domain.*;
 import com.bai.file.dto.file.DownloadFileDTO;
@@ -16,9 +16,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.qiwenshare.common.util.DateUtil;
 import com.qiwenshare.common.util.MimeUtils;
 import com.qiwenshare.common.util.security.SessionUtil;
-import com.bai.file.domain.*;
 import com.bai.file.io.QiwenFile;
-import com.bai.file.mapper.*;
 import com.qiwenshare.ufop.constant.StorageTypeEnum;
 import com.qiwenshare.ufop.constant.UploadFileStatusEnum;
 import com.qiwenshare.ufop.exception.operation.DownloadException;

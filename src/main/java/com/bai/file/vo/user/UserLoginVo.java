@@ -11,7 +11,7 @@ public class UserLoginVo {
     private String userId;
     //    @Schema(description = "openId", example = "")
 //    private String openId;
-    @Schema(description = "用户名", example = "奇文网盘")
+    @Schema(description = "用户名", example = "fms")
     private String username;
     @Schema(description = "真实名", example = "张三")
     private String realname;
@@ -25,15 +25,15 @@ public class UserLoginVo {
     private String email;
     @Schema(description = "性别", example = "男")
     private String sex;
-    @Schema(description = "生日", example = "1994-05-06")
+    @Schema(description = "生日", example = "1888-05-06")
     private String birthday;
-    @Schema(description = "省", example = "陕西省")
+    @Schema(description = "省", example = "重庆")
     private String addrProvince;
-    @Schema(description = "市", example = "西安市")
+    @Schema(description = "市", example = "重庆")
     private String addrCity;
-    @Schema(description = "区", example = "雁塔区")
+    @Schema(description = "区", example = "重庆")
     private String addrArea;
-    @Schema(description = "行业", example = "计算机行业")
+    @Schema(description = "行业", example = "计算机")
     private String industry;
     @Schema(description = "职位", example = "java开发")
     private String position;

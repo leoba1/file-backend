@@ -1,6 +1,6 @@
 package com.bai.file.service;
 
-import com.bai.file.api.IUploadTaskDetailService;
+import com.bai.file.Iinterface.IUploadTaskDetailService;
 import com.bai.file.domain.UploadTaskDetail;
 import com.bai.file.mapper.UploadTaskDetailMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

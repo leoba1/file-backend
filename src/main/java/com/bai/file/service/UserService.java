@@ -2,7 +2,7 @@ package com.bai.file.service;
 
 import cn.hutool.core.util.IdUtil;
 import com.alibaba.fastjson2.JSON;
-import com.bai.file.api.IUserService;
+import com.bai.file.Iinterface.IUserService;
 import com.bai.file.component.JwtComp;
 import com.bai.file.component.UserDealComp;
 import com.bai.file.controller.UserController;

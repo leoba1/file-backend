@@ -1,6 +1,6 @@
 package com.bai.file.service;
 
-import com.bai.file.api.ISysParamService;
+import com.bai.file.Iinterface.ISysParamService;
 import com.bai.file.domain.SysParam;
 import com.bai.file.mapper.SysParamMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

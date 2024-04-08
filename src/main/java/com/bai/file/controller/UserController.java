@@ -1,8 +1,8 @@
 package com.bai.file.controller;
 
 import cn.hutool.core.bean.BeanUtil;
-import com.bai.file.api.IUserLoginInfoService;
-import com.bai.file.api.IUserService;
+import com.bai.file.Iinterface.IUserLoginInfoService;
+import com.bai.file.Iinterface.IUserService;
 import com.bai.file.domain.UserLoginInfo;
 import com.bai.file.domain.user.UserBean;
 import com.bai.file.dto.user.RegisterDTO;

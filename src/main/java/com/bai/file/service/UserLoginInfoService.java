@@ -1,6 +1,6 @@
 package com.bai.file.service;
 
-import com.bai.file.api.IUserLoginInfoService;
+import com.bai.file.Iinterface.IUserLoginInfoService;
 import com.bai.file.domain.UserLoginInfo;
 import com.bai.file.mapper.UserLoginInfoMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

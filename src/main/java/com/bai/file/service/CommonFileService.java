@@ -1,6 +1,6 @@
 package com.bai.file.service;
 
-import com.bai.file.api.ICommonFileService;
+import com.bai.file.Iinterface.ICommonFileService;
 import com.bai.file.domain.CommonFile;
 import com.bai.file.mapper.CommonFileMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

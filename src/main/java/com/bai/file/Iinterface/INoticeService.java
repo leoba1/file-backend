@@ -1,4 +1,4 @@
-package com.bai.file.api;
+package com.bai.file.Iinterface;
 
 import com.bai.file.domain.Notice;
 import com.bai.file.dto.notice.NoticeListDTO;

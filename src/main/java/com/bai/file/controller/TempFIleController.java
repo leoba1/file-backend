@@ -90,6 +90,9 @@ public class TempFIleController {
     @GetMapping("/download/{code}")
     public void download(@PathVariable String code, HttpServletResponse response) throws IOException{
 
+        if (code == null){
+            return;
+        }
         QueryWrapper<TempFile> queryWrapper=new QueryWrapper<>();
         queryWrapper.eq("code",code);
         TempFile one = tempFileService.getOne(queryWrapper);

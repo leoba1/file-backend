@@ -9,7 +9,7 @@
         <version>1.2.8</version>
     </parent>
 
-    <artifactId>qiwen-file</artifactId>
+    <artifactId>fms-bai</artifactId>
     <version>1.2.8-SNAPSHOT</version>
     <name>qiwen-file</name>
     <description>pan.qiwenshare.com</description>

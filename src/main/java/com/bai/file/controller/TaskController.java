@@ -3,7 +3,7 @@ package com.bai.file.controller;
 import com.bai.file.domain.ShareFile;
 import com.bai.file.domain.UserFile;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.bai.file.api.IShareFileService;
+import com.bai.file.Iinterface.IShareFileService;
 import com.bai.file.component.FileDealComp;
 import com.bai.file.io.QiwenFile;
 import com.bai.file.service.UserFileService;

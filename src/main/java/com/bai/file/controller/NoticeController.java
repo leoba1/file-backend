@@ -4,7 +4,7 @@ import com.bai.file.domain.Notice;
 import com.bai.file.dto.notice.NoticeListDTO;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.qiwenshare.common.result.RestResult;
-import com.bai.file.api.INoticeService;
+import com.bai.file.Iinterface.INoticeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,6 +1,6 @@
 package com.bai.file.controller;
 
-import com.bai.file.api.*;
+import com.bai.file.Iinterface.*;
 import com.bai.file.domain.RecoveryFile;
 import com.bai.file.dto.file.DeleteRecoveryFileDTO;
 import com.bai.file.dto.recoveryfile.BatchDeleteRecoveryFileDTO;
@@ -10,7 +10,6 @@ import com.qiwenshare.common.anno.MyLog;
 import com.qiwenshare.common.result.RestResult;
 import com.qiwenshare.common.util.security.JwtUser;
 import com.qiwenshare.common.util.security.SessionUtil;
-import com.bai.file.api.*;
 import com.bai.file.component.AsyncTaskComp;
 import com.bai.file.vo.file.RecoveryFileListVo;
 import io.swagger.v3.oas.annotations.Operation;

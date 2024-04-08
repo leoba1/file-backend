@@ -1,6 +1,6 @@
 package com.bai.file.service;
 
-import com.bai.file.api.IRecoveryFileService;
+import com.bai.file.Iinterface.IRecoveryFileService;
 import com.bai.file.component.FileDealComp;
 import com.bai.file.domain.RecoveryFile;
 import com.bai.file.domain.UserFile;

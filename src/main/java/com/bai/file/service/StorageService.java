@@ -1,6 +1,6 @@
 package com.bai.file.service;
 
-import com.bai.file.api.IStorageService;
+import com.bai.file.Iinterface.IStorageService;
 import com.bai.file.domain.StorageBean;
 import com.bai.file.domain.SysParam;
 import com.bai.file.mapper.StorageMapper;

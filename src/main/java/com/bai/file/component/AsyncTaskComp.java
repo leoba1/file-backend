@@ -1,8 +1,8 @@
 package com.bai.file.component;
 
 import com.alibaba.fastjson2.JSON;
-import com.bai.file.api.IFiletransferService;
-import com.bai.file.api.IRecoveryFileService;
+import com.bai.file.Iinterface.IFiletransferService;
+import com.bai.file.Iinterface.IRecoveryFileService;
 import com.bai.file.domain.FileBean;
 import com.bai.file.domain.UserFile;
 import com.bai.file.mapper.FileMapper;
