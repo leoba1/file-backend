@@ -3,18 +3,24 @@ package com.bai.file.controller;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.RandomUtil;
+import com.bai.file.mapper.TempFileMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.bai.file.dto.file.TempFile;
 import com.bai.file.service.TempFileService;
 import com.bai.file.util.Result;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.toolkit.SqlRunner;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -36,6 +42,9 @@ public class TempFIleController {
     @Autowired
     private TempFileService tempFileService;
 
+    @Autowired
+    private TempFileMapper tempFileMapper;
+
     /**
      * 上传接口
      * @param file
@@ -47,7 +56,7 @@ public class TempFIleController {
     public Result<?> upload(@RequestBody MultipartFile file) throws IOException {
         long size = file.getSize();
         if (size > 1024 * 1024 * 20){
-            throw new IOException();
+            return Result.error("500","文件大小不合法");
         }
 
         //生成随机数
@@ -123,5 +132,41 @@ public class TempFIleController {
             return Result.error("1","文件不存在");
         }
         return Result.success(one);
+    }
+
+    /**
+     * 定时删除
+     * @param
+     * @param
+     * @throws
+     */
+    @Scheduled(cron = "0 0 4 * * ?")
+    public void deleteDir(){
+
+        File directory = new File(localPath);
+
+        if (!directory.exists()) {
+            System.out.println("Directory does not exist.");
+            return;
+        }
+        QueryWrapper<TempFile> queryWrapper =new QueryWrapper<>();
+        queryWrapper.notIn("code","eeeee");
+        tempFileMapper.delete(queryWrapper);
+        try {
+            delete(directory);
+            System.out.println("Directory is deleted.");
+        } catch (Exception e) {
+            System.out.println("Failed to delete directory.");
+            e.printStackTrace();
+        }
+    }
+    private void delete(File file) throws Exception {
+        if (file.isDirectory()) {
+            //如果是目录，递归删除目录下的所有文件和文件夹
+            for (File subFile : file.listFiles()) {
+                delete(subFile);
+            }
+        }
+        file.delete(); //删除文件或空目录
     }
 }
